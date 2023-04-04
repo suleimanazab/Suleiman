@@ -1,0 +1,30 @@
+/*
+Limits the selection of options for a Checkbox
+*/
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+function limitCheckboxSelection(groupName, limit) {
+  const checkboxes = document.querySelectorAll(`input[name="${groupName}"]`);
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', () => {
+      const checkedCount = document.querySelectorAll(`input[name="${groupName}"]:checked`).length;
+
+      if (checkedCount > limit) {
+        checkbox.checked = false;
+      }
+    });
+  });
+}
+
+const checkboxSetups = [
+  { groupName: "chekbox-name-1", limit: 3 },
+  { groupName: "chekbox-name-2", limit: 2 },
+];
+
+checkboxSetups.forEach((setup) => {
+  limitCheckboxSelection(setup.groupName, setup.limit);
+});
+});
+</script>
